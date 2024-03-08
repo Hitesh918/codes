@@ -1,0 +1,115 @@
+class Deque{
+    private int size;
+    private int front;
+    private int rear;
+    private Integer[] arr;
+    
+    Deque(int size){
+        arr=new Integer[size];
+        this.size=size;
+        front=-1;
+        rear=-1;
+    }
+    
+    public void push_front(int elem){
+        if(front <= 0){
+            System.out.println("overflow");
+        }
+        else{
+            front--;
+            arr[front]=elem;
+        }
+        
+    }
+    public void push_back(int elem){
+        if(front==-1 && rear==-1){
+            front++;
+            rear++;
+            arr[rear]=elem;
+        }
+        else{
+            if(rear==size-1){
+                System.out.println("overflow");
+            }
+            else{
+                rear++;
+                arr[rear]=elem;
+            }
+        }
+    }
+    public int pop_front(){
+        if(front==-1){
+            System.out.println("underflow");
+            return -1;
+        }
+        else if(front==rear){
+            int ans=arr[front];
+            front=-1;
+            rear=-1;
+            return ans;
+        }
+        else{
+            int ans=arr[front];
+            front++;
+            return ans;
+        }
+    }
+    public int pop_back(){
+        if(rear==-1){
+            System.out.println("underflow");
+            return -1;
+        }
+        else if(front==rear){
+            int ans=arr[front];
+            front=-1;
+            rear=-1;
+            return ans;
+        }
+        else{
+            int ans=arr[rear];
+            rear--;
+            return ans;
+        }
+    }
+    public int front(){
+        if(front==-1){
+            System.out.println("empty");
+            return -1;
+        }
+        else{
+            return arr[front];
+        }
+    }
+    public int back(){
+        if(rear==-1){
+            System.out.println("empty");
+            return -1;
+        }
+        else{
+            return arr[rear];
+        }
+    }
+};
+
+public class Main
+{
+	public static void main(String[] args) {
+		Deque deq = new Deque(4);
+		deq.push_front(1);
+		deq.push_back(1);
+		deq.push_back(2);
+		deq.push_back(3);
+		deq.push_back(4);
+		System.out.println("front is " + deq.front());
+		System.out.println("rear is " + deq.back());
+		deq.push_back(5);
+		deq.pop_back();
+		deq.push_back(5);
+		System.out.println("rear is " + deq.back());
+		deq.pop_front();
+		System.out.println("front is " + deq.front());
+		deq.push_front(5);
+		System.out.println("front is " + deq.front());
+		deq.push_front(6);
+	}
+}
