@@ -1,0 +1,66 @@
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ };
+
+
+
+ *****************************************************************/
+
+ class Solution{
+    Node head=null;
+    Node tail=null;
+    public void push(int x) {
+        if(head==null){
+            head=new Node(x);
+            tail=head;
+        }
+        else{
+            Node newNode=new Node(x);
+            tail.next=newNode;
+            tail=tail.next;
+        }
+        // Write Your Code Here
+
+    }
+
+    public int pop() {
+        // Write Your Code Here
+        if(head==null){
+            return -1;
+        }
+        else if(head==tail){
+            int ans=head.data;
+            head=null;
+            tail=null;
+            return ans;
+        }
+        else{
+            int ans=head.data;
+            head=head.next;
+            return ans;
+        }
+    }
+}
