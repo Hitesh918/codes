@@ -1,0 +1,188 @@
+package qwe;
+
+
+
+
+class Node{
+
+int data;
+
+Node next;
+
+
+Node(){
+
+
+}
+
+Node(int elem){
+
+this.data=elem;
+
+this.next=null;
+
+}
+
+};
+
+
+
+
+class CircularList{
+
+Node tail;
+
+CircularList(){
+
+this.tail=null;
+
+}
+
+CircularList(int elem){
+
+tail=new Node(elem);
+
+tail.next=tail;
+
+}
+
+
+void insertAtHead(int elem) {
+
+if(this.tail==null) {
+
+this.tail=new Node(elem);
+
+tail.next=tail;
+
+}
+
+else {
+
+Node temp =new Node(elem);
+
+temp.next=tail.next;
+
+tail.next=temp;
+
+}
+
+}
+
+void insertAtTail(int elem) {
+
+if(this.tail==null) {
+
+this.tail=new Node(elem);
+
+tail.next=tail;
+
+}
+
+else {
+
+Node temp =new Node(elem);
+
+temp.next=this.tail.next;
+
+this.tail.next=temp;
+
+this.tail=this.tail.next;
+
+}
+
+}
+
+void deleteAtFront() {
+
+if(tail==null) return ;
+
+if(tail.next==tail) {
+
+tail=null;
+
+return;
+
+}
+
+tail.next=tail.next.next;
+
+}
+
+void deleteAtLast() {
+
+if(tail==null) return ;
+
+if(tail.next==tail) {
+
+tail=null;
+
+return;
+
+}
+
+Node temp=this.tail.next;
+
+while(temp.next!=this.tail) {
+
+temp=temp.next;
+
+}
+
+temp.next=temp.next.next;
+
+this.tail=temp;
+
+}
+
+void display() {
+
+if(this.tail==null) return;
+
+Node temp=this.tail.next;
+
+while(temp!=this.tail) {
+
+System.out.println(temp.data);
+
+temp=temp.next;
+
+}
+
+System.out.println(temp.data);
+
+}
+
+};
+
+
+
+
+public class qwe {
+
+
+
+
+public static void main(String[] args) {
+
+CircularList cl = new CircularList(5);
+
+cl.insertAtHead(6);
+
+cl.insertAtHead(7);
+
+cl.insertAtTail(4);
+
+cl.insertAtHead(8);
+
+cl.insertAtTail(3);
+
+cl.deleteAtFront();
+
+cl.deleteAtLast();
+
+cl.display();
+
+}
+
+}
