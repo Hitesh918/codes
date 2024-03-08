@@ -1,0 +1,103 @@
+package proj;
+
+class Node{
+	int data;
+	Node next;
+	Node prev;
+	
+	Node(){
+		
+	}
+	Node(int elem){
+		this.data=elem;
+		this.next=null;
+		this.prev=null;
+	}
+};
+
+class del{
+	Node head;
+	del(){
+		this.head = new Node(-1);
+	}
+	del(int elem){
+		this.head = new Node(elem);
+	}
+	
+	//display
+	public void display() {
+		Node temp = this.head;
+		while(temp!=null) {
+			System.out.println(temp.data);
+			temp=temp.next;
+		}
+	}
+	
+	public void insertAtHead(int elem) {
+		Node temp = new Node(elem);
+		if(this.head==null) {
+			this.head=temp;
+			return;
+		}
+		temp.next=head;
+		head.prev=temp;
+		this.head=temp;
+	}
+	
+	public void deleteAtHead() {
+		if(head!=null) {
+			head=head.next;
+			if(head!=null) {
+				head.prev=null;
+			}
+		}
+	}
+	public void insertAtTail(int elem) {
+		Node temp = new Node(elem);
+		if(this.head==null) {
+			this.head=temp;
+			return;
+		}
+		Node curr = this.head;
+		while(curr.next !=null) {
+			curr=curr.next;
+		}
+		curr.next=temp;
+		temp.prev=curr;
+	}
+	public void deleteAtTail() {
+		if(head != null) {
+			Node temp = this.head;
+			if(head.next==null) {
+				head=null;
+				return;
+			}
+			while(temp.next.next != null) {
+				temp=temp.next;
+			}
+			temp.next.prev=null;
+			temp.next=null;
+		}
+	}
+	
+};
+
+
+
+
+public class qwe {
+
+	public static void main(String[] args) {
+		
+		del l1 = new del(5);
+		l1.insertAtHead(4);
+		l1.insertAtHead(3);
+		l1.insertAtHead(2);
+		l1.deleteAtHead();
+		l1.insertAtTail(6);
+		l1.deleteAtTail();
+		l1.display();
+	}
+
+}
+
