@@ -1,0 +1,181 @@
+class Node{
+    int data;
+    Node next;
+    
+    Node(){
+        this.data=-1;
+        this.next=null;
+    }
+
+    Node(int elem){
+        this.data=elem;
+        this.next=null;
+    }
+
+};
+
+class SinglyLinkedList{
+    Node head;
+    SinglyLinkedList(){
+        this.head=null;
+    }
+    void insertAtHead(int elem) {
+        Node newNode = new Node(elem);
+        newNode.next = this.head;
+        head=newNode;
+    }
+    void insertAtEnd(int elem) {
+        Node newNode = new Node(elem);
+        if(head==null){
+            head=newNode;
+            return;
+        }
+        Node temp = head;
+        while(temp.next != null) {
+            temp=temp.next;
+        }
+        temp.next=newNode;
+    }
+    void display() {
+        System.out.println("list");
+        Node temp = head;
+        while(temp!=null) {
+            System.out.println(temp.data);
+            temp=temp.next;
+        }
+    }
+
+    
+    public Node concat(Node secondHead){
+        if(secondHead == null) {
+            return this.head;
+        }
+        Node temp = this.head;
+        while(temp.next != null) {
+            temp=temp.next;
+        }
+        
+        if(temp == null) {
+            return secondHead;
+        }
+        temp.next=secondHead;
+        return this.head;
+    }
+
+
+    public void mergeWith(Node secondHead) {
+        Node dummy = new Node(-1);
+        Node temp = dummy;
+        Node t1 = this.head;
+        Node t2 = secondHead;
+        while(t1 != null || t2 != null) {
+            if(t1 == null) {
+                temp.next = t2;
+                t2=t2.next;
+            }
+            
+            else if(t2 == null) {
+                temp.next = t1;
+                t1=t1.next;
+            }
+            
+            else {
+                if(t1.data <= t2.data) {
+                    temp.next = t1;
+                    t1=t1.next;
+                }
+                else {
+                    temp.next = t2;
+                    t2=t2.next;
+                }
+            }
+            temp=temp.next;
+        }
+        head=dummy.next;
+    }
+
+    public void deleteAlternate() {
+        Node temp = head;
+        if(temp == null || temp.next == null) {
+            return;
+        }
+        
+        while(temp!=null && temp.next!=null) {
+            temp.next = temp.next.next;
+            temp=temp.next;
+        }
+    
+    }
+    
+    public int freq(int key) {
+        int ans=0;
+        Node temp = this.head;
+        while(temp!=null){
+            if(temp.data == key) {
+                ans++;
+            }
+            temp=temp.next;
+        }
+        return ans;
+    }
+
+    public void reverse() {
+        if(head == null) {
+            return;
+        }
+        Node temp = head;
+        Node prev = null;
+        while(temp.next != null) {
+            Node next = temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = next;
+        }
+        temp.next=prev;
+        head=temp;
+    }
+
+    public Node reverseUsingReccusion(Node head) {
+        if(head == null || head.next==null) {
+            return head;
+        }
+        Node newHead = this.reverseUsingReccusion(head.next);
+        head.next.next = head;
+        head.next=null;
+        return newHead;
+    }
+};
+
+public class Main {
+    public static void main(String[] args) {
+        SinglyLinkedList sl = new SinglyLinkedList();
+        sl.insertAtEnd(2);
+        sl.insertAtEnd(5);
+        sl.insertAtEnd(8);
+        sl.insertAtEnd(9);
+    
+        // sl.display();
+        SinglyLinkedList sl2 = new SinglyLinkedList();
+        sl2.insertAtEnd(3);
+        sl2.insertAtEnd(4);
+        sl2.insertAtEnd(7);
+        sl2.insertAtEnd(12);
+    
+        // sl2.display();
+        // sl.concat(sl2.head);
+        // sl.display();
+        sl.mergeWith(sl2.head);
+        sl.display();
+        sl.deleteAlternate();
+        sl.display();
+        sl.insertAtEnd(2);
+        System.out.println(sl.freq(2));
+        sl.reverse();
+        sl.display();
+        sl.head=sl.reverseUsingReccusion(sl.head);
+        sl.display();
+    
+    
+    }
+
+}
